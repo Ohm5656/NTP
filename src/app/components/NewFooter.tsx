@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import logo from "figma:asset/9d68ce4323e20f2687da32ca763fe4e87c181bcf.png";
+import logo from "../../assets/9d68ce4323e20f2687da32ca763fe4e87c181bcf.png";
 
 export function NewFooter() {
   const location = useLocation();
