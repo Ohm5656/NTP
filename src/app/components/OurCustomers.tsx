@@ -2,9 +2,9 @@ import { motion } from 'motion/react';
 import { SectionWrapper } from './SectionWrapper';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
-import cpLogo from "figma:asset/88bf3f31bd74a9fd9d845b4646521b19ff16b93f.png";
-import mayekawaLogo from "figma:asset/8af1f773480944f7a152dc7efbcd619a82544e28.png";
-import logoGroup from "figma:asset/89024a7aee91ed8cdbbd8868525e872ca8dcfa44.png";
+import cpLogo from "../../assets/88bf3f31bd74a9fd9d845b4646521b19ff16b93f.png";
+import mayekawaLogo from "../../assets/8af1f773480944f7a152dc7efbcd619a82544e28.png";
+import logoGroup from "../../assets/89024a7aee91ed8cdbbd8868525e872ca8dcfa44.png";
 
 export function OurCustomers() {
   const mainLogos = [
