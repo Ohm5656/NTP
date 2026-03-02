@@ -327,4 +327,4 @@ For detailed guides, see the documentation files listed above.
 
 ---
 
-**Built with ❤️ for NTP Electric and Engineering Co., Ltd.**
+
