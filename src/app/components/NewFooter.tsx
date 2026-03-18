@@ -57,12 +57,13 @@ export function NewFooter() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="mb-6 bg-white p-2 inline-block rounded-lg shadow-sm">
+              <div className="mb-4 bg-white p-2 inline-block rounded-lg shadow-sm">
                 <img src={logo} alt="NTP Electric and Engineering" className="h-16 w-auto" />
               </div>
-              <p className="text-white/80 mb-6 leading-relaxed">
-                ผู้เชี่ยวชาญด้านระบบไฟฟ้าและวิศวกรรมสำหรับอุตสาหกรรมและพาณิชยกรรม 
-                มุ่งมั่นในความเป็นเลิศ ความปลอดภัย และนวัตกรรม
+              <p className="text-white/80 mb-4 leading-relaxed">
+                ผู้เชี่ยวชาญด้านการออกแบบ ติดตั้งงานระบบไฟฟ้าโรงงาน 
+                <br />
+                และงานระบบไฟฟ้าห้องเย็น
               </p>
 
               {/* Contact Info */}

@@ -1,6 +1,6 @@
-import { motion } from 'motion/react';
-import { ProjectCard } from '../components/ProjectCard';
-import { projects } from '../../data/projects';
+import { motion } from "motion/react";
+import { ProjectGalleryGrid } from "../components/ProjectGalleryGrid";
+import { projects } from "../../data/projects";
 
 export function ProjectsPage() {
   return (
@@ -12,38 +12,35 @@ export function ProjectsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl text-white mb-6"
+            className="text-4xl md:text-5xl text-white mb-6 font-bold"
           >
             โครงการทั้งหมด
           </motion.h1>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-white/90 max-w-3xl mx-auto"
           >
-            แสดงผลงานโครงการวิศวกรรมไฟฟ้าที่ประสบความสำเร็จของเราในอุตสาหกรรมต่างๆ
+            แสดงผลงานโครงการวิศวกรรมไฟฟ้าที่ประสบความสำเร็จของเราในอุตสาหกรรมต่าง ๆ
           </motion.p>
         </div>
       </section>
 
       {/* Projects Grid */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="mb-6 text-gray-600"
+            className="mb-8 md:mb-12 text-gray-500 text-sm"
           >
-            แสดง {projects.length} โครงการ
+            แสดงทั้งหมด {projects.length} โครงการ
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </div>
+          <ProjectGalleryGrid projects={projects} />
         </div>
       </section>
 
@@ -56,12 +53,15 @@ export function ProjectsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl text-white mb-6">
+            <h2 className="text-3xl md:text-4xl text-white mb-6 font-bold">
               พร้อมเริ่มโครงการของคุณ?
             </h2>
+
             <p className="text-xl text-white/90 mb-8">
-              ติดต่อเราวันนี้เพื่อหารือเกี่ยวกับความต้องการเฉพาะของคุณและรับโซลูชั่นที่เหมาะสมสำหรับโครงการของคุณ
+              ติดต่อเราวันนี้เพื่อหารือเกี่ยวกับความต้องการเฉพาะของคุณ
+              และรับโซลูชันที่เหมาะสมสำหรับโครงการของคุณ
             </p>
+
             <a
               href="/contact"
               className="inline-block bg-[#dc2626] hover:bg-[#b91c1c] text-white px-8 py-4 rounded-md transition-colors text-lg font-medium"

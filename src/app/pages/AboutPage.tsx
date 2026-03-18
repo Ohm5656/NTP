@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { Target, Eye, Award, Users, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-
+import myImage from "../../assets/picture_2.jpg";
 export function AboutPage() {
   const navigate = useNavigate();
   const values = [
@@ -31,7 +31,7 @@ export function AboutPage() {
   const milestones = [
     { year: '1998', title: 'ก่อตั้งบริษัท', description: 'เริ่มดำเนินธุรกิจในฐานะผู้รับเหมาไฟฟ้าขนาดเล็ก' },
     { year: '2005', title: 'ขยายบริการทางวิศวกรรม', description: 'เริ่มให้บริการออกแบบและที่ปรึกษาด้านวิศวกรรมไฟฟ้า' },
-    { year: '2012', title: 'ได้รับการรับรอ��� ISO ครั้งแรก', description: 'ได้รับมาตรฐาน ISO 9001:2008 สำหรับระบบการจัดการคุณภาพ' },
+    { year: '2012', title: 'ได้รับการรับรอง ISO ครั้งแรก', description: 'ได้รับมาตรฐาน ISO 9001:2008 สำหรับระบบการจัดการคุณภาพ' },
     { year: '2018', title: 'ก้าวสู่ระดับสากล', description: 'เริ่มดำเนินโครงการขนาดใหญ่ในภูมิภาคเอเชียตะวันออกเฉียงใต้' },
     { year: '2021', title: 'ผู้นำด้านเทคโนโลยีอัจฉริยะ', description: 'นำเทคโนโลยี IoT และ Automation มาใช้ในงานวิศวกรรมอย่างเต็มรูปแบบ' },
   ];
@@ -94,22 +94,29 @@ export function AboutPage() {
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl"
-            >
-              <ImageWithFallback
-                src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop"
-                alt="Modern Engineering"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 p-8">
-                <p className="text-white text-xl font-semibold italic">"เราไม่ได้แค่ติดตั้งระบบ แต่เราสร้างความเชื่อมั่น"</p>
-              </div>
-            </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl"
+        >
+          <ImageWithFallback
+            src={myImage}
+            alt="Modern Engineering"
+            className="w-full h-full object-cover"
+          />
+
+          {/* 🔥 ทำให้มืดทั้งภาพ */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+          {/* ข้อความ */}
+          <div className="absolute bottom-0 left-0 right-0 p-8">
+            <p className="text-white text-lg text-center md:text-xl font-bold italic leading-tight drop-shadow-[0_6px_30px_rgba(0,0,0,0.6)]">
+              "ความพึงพอใจของลูกค้า คือหัวใจหลักของงานเรา"
+            </p>
+          </div>
+        </motion.div>
           </div>
         </div>
       </section>
