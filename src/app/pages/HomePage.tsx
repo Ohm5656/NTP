@@ -104,7 +104,7 @@ export function HomePage() {
       suffix: "+",
       label: "โครงการที่ดำเนินการสำเร็จ",
     },
-    { number: 99, suffix: "%", label: "ความไว้วางใจจากลูกค้า" },
+    { number: 99, suffix: "%", label: "ความไว้วางใจจากลูกค้าในทุกโครงการ" },
     { number: 10, suffix: "+", label: "ประสบการณ์มากกว่า" },
   ];
 
@@ -324,7 +324,7 @@ export function HomePage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl text-gray-600 max-w-3xl mx-auto"
             >
-              โซลูชันด้านระบบไฟฟ้าและวิศวกรรมครบวงจรที่ปรับให้ตรงกับความต้องการเฉพาะของคุณ
+              ให้บริการออกแบบและติดตั้งระบบไฟฟ้าสำหรับโรงงานอุตสาหกรรม และระบบไฟฟ้าห้องเย็น <br/>โดยคำนึงถึงมาตรฐาน ความปลอดภัย และความเหมาะสมของการใช้งานในแต่ละโครงการ
             </motion.p>
           </div>
 
@@ -379,10 +379,9 @@ export function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 max-w-4xl mx-auto"
             >
-              ตัวอย่างโครงการวิศวกรรมไฟฟ้าที่ประสบความสำเร็จในอุตสาหกรรมต่าง
-              ๆ
+              ตัวอย่างโครงการวิศวกรรมไฟฟ้าที่เราได้ดำเนินงานให้กับลูกค้าภาคอุตสาหกรรมและธุรกิจต่าง ๆ
             </motion.p>
           </div>
 
