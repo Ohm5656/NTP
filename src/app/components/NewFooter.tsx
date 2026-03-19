@@ -61,7 +61,7 @@ export function NewFooter() {
                 <img src={logo} alt="NTP Electric and Engineering" className="h-16 w-auto" />
               </div>
               <p className="text-white/80 mb-4 leading-relaxed">
-                ผู้เชี่ยวชาญด้านการออกแบบ ติดตั้งงานระบบไฟฟ้าโรงงาน 
+                ผู้เชี่ยวชาญด้านการ ออกแบบ ติดตั้งงานระบบไฟฟ้าโรงงาน 
                 <br />
                 และงานระบบไฟฟ้าห้องเย็น
               </p>
