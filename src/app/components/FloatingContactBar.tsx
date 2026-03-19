@@ -24,7 +24,7 @@ export function FloatingContactBar() {
     {
       icon: Mail,
       label: 'อีเมล',
-      href: 'mailto:info@ntpelectric.com',
+      href: 'mailto:ntpelectric2017@gmail.com',
       color: 'bg-[#dc2626] hover:bg-[#b91c1c]',
     },
   ];

@@ -80,7 +80,7 @@ export function NewFooter() {
                   className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
                 >
                   <Mail size={18} className="flex-shrink-0" />
-                  <span>info@ntpelectric.com</span>
+                  <span>ntpelectric2017@gmail.com</span>
                 </a>
                 <a
                   href="https://line.me/ti/p/~ntpelectric"
@@ -93,7 +93,7 @@ export function NewFooter() {
                 </a>
                 <div className="flex items-start gap-3 text-white/80">
                   <MapPin size={18} className="flex-shrink-0 mt-0.5" />
-                  <span>123/45 ถนนอุตสาหกรรม แขวงบางนา เขตบางนา กรุงเทพฯ 10260</span>
+                  <span>333/51 หมู่ 19 ต.บางพลีใหญ่ อ.บางพลี จ.สมุทรปราการ 10540</span>
                 </div>
               </div>
             </motion.div>
@@ -161,12 +161,7 @@ export function NewFooter() {
               &copy; 2026 NTP Electric and Engineering Co., Ltd. สงวนลิขสิทธิ์
             </p>
             <div className="flex gap-6 text-sm text-white/60">
-              <button className="hover:text-white transition-colors">
-                นโยบายความเป็นส่วนตัว
-              </button>
-              <button className="hover:text-white transition-colors">
-                เงื่อนไขการใช้งาน
-              </button>
+           
             </div>
           </div>
         </div>

@@ -63,8 +63,8 @@ export function ContactPage() {
     {
       icon: Mail,
       title: 'อีเมล',
-      value: 'info@ntpelectric.com',
-      href: 'mailto:info@ntpelectric.com',
+      value: 'ntpelectric2017@gmail.com',
+      href: 'mailto:ntpelectric2017@gmail.com',
       color: 'bg-[#dc2626]',
     },
   ];
@@ -264,9 +264,9 @@ export function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">ที่อยู่</h4>
                       <p className="text-gray-600 leading-relaxed">
-                        123/45 ถนนอุตสาหกรรม<br />
-                        แขวงบางนา เขตบางนา<br />
-                        กรุงเทพมหานคร 10260
+                       333/51 หมู่ 19<br />
+                        ตำบลบางพลีใหญ่ อำเภอบางพลี <br />
+                        สมุทรปราการ 10540 
                       </p>
                     </div>
                   </div>
@@ -278,8 +278,7 @@ export function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">เวลาทำการ</h4>
                       <p className="text-gray-600">
-                        จันทร์ - ศุกร์: 08:00 - 17:00<br />
-                        เสาร์: 08:00 - 12:00<br />
+                        จันทร์ - เสาร์: 08:00 - 17:00<br />
                         อาทิตย์: ปิดทำการ
                       </p>
                     </div>
