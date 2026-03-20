@@ -1,7 +1,5 @@
 # NTP Electric and Engineering Co., Ltd. - Corporate Website
 
-> Modern one-page landing website with Thai language support, built with React, Tailwind CSS, and Motion animations.
-
 ![Website Preview](https://img.shields.io/badge/Status-Production%20Ready-success)
 ![React](https://img.shields.io/badge/React-18.3.1-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
