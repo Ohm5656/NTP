@@ -21,45 +21,44 @@ import { projects } from "../../data/projects";
 import myImage from "../../assets/picture_1.jpg";
 
 export function HomePage() {
-  const services = [
-    {
-      icon: Zap,
-      title: "ติดตั้งระบบไฟฟ้า",
-      description:
-        "ออกแบบและติดตั้งระบบไฟฟ้าครบวงจรสำหรับโครงการอุตสาหกรรมและพาณิชยกรรม พร้อมการปฏิบัติตามมาตรฐานความปลอดภัย",
-    },
-    {
-      icon: Building2,
-      title: "ระบบไฟฟ้าพาณิชย์",
-      description:
-        "โซลูชันระบบไฟฟ้าครบวงจรสำหรับอาคารสำนักงาน ร้านค้าปลีก และสถานประกอบการพาณิชย์",
-    },
-    {
-      icon: Factory,
-      title: "ระบบอัตโนมัติอุตสาหกรรม",
-      description:
-        "ระบบอัตโนมัติขั้นสูง โปรแกรม PLC และออกแบบตู้ควบคุมสำหรับโรงงานผลิต",
-    },
-    {
-      icon: Wrench,
-      title: "บำรุงรักษาและซ่อมแซม",
-      description:
-        "บริการบำรุงรักษาตามกำหนดและสนับสนุนฉุกเฉิน 24/7 เพื่อให้ระบบไฟฟ้าของคุณทำงานได้อย่างต่อเนื่อง",
-    },
-    {
-      icon: Lightbulb,
-      title: "ที่ปรึกษาด้านพลังงาน",
-      description:
-        "การประเมินประสิทธิภาพพลังงานและโซลูชันเพื่อลดต้นทุนการดำเนินงานและผลกระทบต่อสิ่งแวดล้อม",
-    },
-    {
-      icon: Shield,
-      title: "ตรวจสอบความปลอดภัย",
-      description:
-        "การตรวจสอบความปลอดภัยระบบไฟฟ้าอย่างละเอียดและการทดสอบมาตรฐานตามข้อกำหนดอุตสาหกรรม",
-    },
-  ];
-
+const services = [
+  {
+    icon: Zap,
+    title: "ออกแบบและผลิตตู้คอนโทรล",
+    description:
+      "ออกแบบวงจรไฟฟ้าและระบบควบคุม พร้อมผลิตตู้ MDB / DB / Control Panel โดยเลือกอุปกรณ์ให้เหมาะสม รองรับงานโรงงานและเครื่องจักรอุตสาหกรรม",
+  },
+  {
+    icon: Factory,
+    title: "ระบบควบคุมอัตโนมัติ (PLC & Automation)",
+    description:
+      "ออกแบบและพัฒนาระบบควบคุมเครื่องจักร เขียนโปรแกรม PLC เชื่อมต่อ Sensor, Motor และ Inverter เพื่อเพิ่มประสิทธิภาพการผลิต",
+  },
+  {
+    icon: Building2,
+    title: "ระบบไฟฟ้าห้องเย็น",
+    description:
+      "ออกแบบและติดตั้งระบบควบคุมอุณหภูมิ ตู้ควบคุม Compressor และ Condensing Unit พร้อมระบบป้องกันสำหรับงานห้องเย็นอุตสาหกรรม",
+  },
+  {
+    icon: Wrench,
+    title: "ติดตั้งระบบไฟฟ้าเครื่องจักร",
+    description:
+      "ติดตั้งระบบไฟฟ้าสำหรับเครื่องจักรอุตสาหกรรม Wiring และเชื่อมต่ออุปกรณ์ พร้อมทดสอบระบบให้พร้อมใช้งานจริง",
+  },
+  {
+    icon: Lightbulb,
+    title: "Wiring ภายในตู้คอนโทรล",
+    description:
+      "เดินสายภายในตู้คอนโทรลอย่างเป็นระเบียบ ตามมาตรฐานวิศวกรรม พร้อมตรวจสอบความถูกต้องก่อนใช้งาน",
+  },
+  {
+    icon: Shield,
+    title: "ซ่อมบำรุงและปรับปรุงระบบไฟฟ้า",
+    description:
+      "ตรวจสอบ แก้ไข และปรับปรุงระบบควบคุม อัปเกรดตู้คอนโทรล และบำรุงรักษาเครื่องจักรเพื่อให้ทำงานได้อย่างต่อเนื่อง",
+  },
+];
   const certifications = [
     {
       title: "ISO 9001:2015",
@@ -97,6 +96,12 @@ export function HomePage() {
     "ได้รับการรับรองจากสถาบันมาตรฐานอุตสาหกรรมไทย",
     "สมาชิกสมาคมผู้รับเหมาไฟฟ้า",
   ];
+
+const featuredProjectIds = [1, 11, 14, 8, 4, 9];
+
+const featuredProjects = featuredProjectIds
+  .map((id) => projects.find((p) => p.id === id))
+  .filter(Boolean);
 
   const stats = [
     {
@@ -371,7 +376,7 @@ export function HomePage() {
               transition={{ duration: 0.6 }}
               className="text-4xl md:text-5xl text-[#1a3a6b] mb-4 font-bold"
             >
-              โครงการของเรา
+              ผลงานที่ผ่านมาของเรา
             </motion.h2>
 
             <motion.p
@@ -386,7 +391,7 @@ export function HomePage() {
           </div>
 
           <ProjectGalleryGrid
-            projects={projects.slice(0, 6)}
+            projects={featuredProjects}
             className="mb-16"
           />
 

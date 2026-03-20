@@ -14,16 +14,16 @@ export function ProjectsPage() {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl text-white mb-6 font-bold"
           >
-            โครงการทั้งหมด
+            ผลงานของเรา
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-white/90 max-w-3xl mx-auto"
+            className="text-xl text-white/90 max-w-5xl mx-auto"
           >
-            แสดงผลงานโครงการวิศวกรรมไฟฟ้าที่ประสบความสำเร็จของเราในอุตสาหกรรมต่าง ๆ
+            รวมตัวอย่างผลงานโครงการด้านระบบไฟฟ้าและระบบควบคุมที่เราได้ดำเนินการในภาคอุตสาหกรรม
           </motion.p>
         </div>
       </section>
@@ -53,13 +53,12 @@ export function ProjectsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl text-white mb-6 font-bold">
-              พร้อมเริ่มโครงการของคุณ?
+            <h2 className="text-3xl md:text-1xl text-white mb-3 font-bold max-w-10xl mx-auto">
+              พร้อมเริ่มโครงการระบบไฟฟ้ากับทีมงานมืออาชีพแล้วหรือยัง ?
             </h2>
 
             <p className="text-xl text-white/90 mb-8">
-              ติดต่อเราวันนี้เพื่อหารือเกี่ยวกับความต้องการเฉพาะของคุณ
-              และรับโซลูชันที่เหมาะสมสำหรับโครงการของคุณ
+              เรายินดีให้คำปรึกษา ออกแบบ และวางแผนงานระบบไฟฟ้า ให้เหมาะสมกับความต้องการของธุรกิจคุณอย่างครบวงจร
             </p>
 
             <a
