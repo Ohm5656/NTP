@@ -76,7 +76,7 @@ export function OurCustomers() {
       <ImageWithFallback
         src={logo.src}
         alt={logo.name}
-        className="h-24 w-auto object-contain"
+        className="h-35 w-auto object-contain"
       />
     </motion.div>
   ))}
