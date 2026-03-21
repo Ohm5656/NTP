@@ -41,13 +41,13 @@ export function ProjectCard({
         </div>
 
         <div className="relative h-72 overflow-hidden bg-slate-100">
-          <ImageWithFallback
-            src={project.coverImage}
-            alt={project.titleTh}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/55 via-[#0f172a]/5 to-transparent" />
-        </div>
+  <ImageWithFallback
+    src={project.coverImage}
+    alt={project.titleTh}
+    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+  />
+  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/10 via-transparent to-transparent" />
+</div>
       </div>
 
       <div className="space-y-4 p-6">

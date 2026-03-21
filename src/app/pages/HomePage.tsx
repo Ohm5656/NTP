@@ -19,6 +19,7 @@ import { CountUpAnimation } from "../components/CountUpAnimation";
 import { OurCustomers } from "../components/OurCustomers";
 import { projects } from "../../data/projects";
 import myImage from "../../assets/picture_1.jpg";
+import hero from "../../assets/company.png";
 
 export function HomePage() {
 const services = [
@@ -97,7 +98,7 @@ const services = [
     "สมาชิกสมาคมผู้รับเหมาไฟฟ้า",
   ];
 
-const featuredProjectIds = [1, 11, 14, 8, 4, 9];
+const featuredProjectIds = [1, 13, 14, 8, 4, 9];
 
 const featuredProjects = featuredProjectIds
   .map((id) => projects.find((p) => p.id === id))
@@ -122,7 +123,7 @@ const featuredProjects = featuredProjectIds
       >
         <div className="absolute inset-0 overflow-hidden">
           <ImageWithFallback
-            src="https://images.unsplash.com/photo-1769778674824-e69f58d7c55d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwZW5naW5lZXJpbmclMjBpbmR1c3RyaWFsJTIwZmFjaWxpdHl8ZW58MXx8fHwxNzcwNDg0MTA1fDA&ixlib=rb-4.1.0&q=80&w=1080"
+            src={hero}
             alt="Electrical Engineering Facility"
             className="w-full h-full object-cover"
           />
@@ -416,129 +417,74 @@ const featuredProjects = featuredProjectIds
         </div>
       </SectionWrapper>
 
-      {/* Certifications Section */}
-      <SectionWrapper
-        id="certifications"
-        className="py-20 bg-white"
+      {/* Professional Standards Section */}
+<SectionWrapper
+  id="standards"
+  className="py-20 bg-white"
+>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {/* Header */}
+    <div className="text-center mb-16">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-4xl md:text-5xl text-[#1a3a6b] mb-4 font-bold"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl text-[#1a3a6b] mb-4 font-bold"
-            >
-              ใบรับรองและการรับรอง
-            </motion.h2>
+        การรับรองและมาตรฐานการดำเนินงาน
+      </motion.h2>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-600 max-w-3xl mx-auto"
-            >
-              ความมุ่งมั่นของเราในความเป็นเลิศได้รับการสนับสนุนด้วยใบรับรองและการรับรองระดับอุตสาหกรรม
-            </motion.p>
-          </div>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="text-xl text-gray-600 max-w-3xl mx-auto"
+      >
+        ดำเนินงานตามมาตรฐานวิศวกรรมและความปลอดภัย เพื่อให้มั่นใจในคุณภาพและความน่าเชื่อถือในทุกโครงการ
+      </motion.p>
+    </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                }}
-                className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-[#dc2626] transition-colors group relative overflow-hidden"
-              >
-                <div className="absolute top-4 right-4 text-gray-300 text-6xl opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Award size={60} />
-                </div>
+    {/* Items */}
+    <div className="max-w-4xl mx-auto">
+      <div className="grid sm:grid-cols-2 gap-6">
+        
+        {[
+          "ดำเนินงานโดยวิศวกรที่ได้รับใบอนุญาต (กว.)",
+          "จดทะเบียนบริษัทถูกต้องตามกฎหมาย",
+          "ปฏิบัติงานตามมาตรฐานวิศวกรรมและความปลอดภัย",
+          "มีประสบการณ์งานระบบไฟฟ้าในภาคอุตสาหกรรม",
+        ].map((item, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.5,
+              delay: index * 0.1,
+            }}
+            className="flex items-center gap-4 bg-gray-50 p-6 rounded-lg"
+          >
+            <CheckCircle
+              className="text-[#dc2626] flex-shrink-0"
+              size={24}
+            />
+            <p className="text-gray-700 text-base">
+              {item}
+            </p>
+          </motion.div>
+        ))}
 
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-[#1a3a6b] rounded-lg flex items-center justify-center group-hover:bg-[#dc2626] transition-colors flex-shrink-0">
-                      <FileCheck
-                        className="text-white"
-                        size={24}
-                      />
-                    </div>
+      </div>
+    </div>
+  </div>
+</SectionWrapper>
 
-                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                      {cert.year}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg text-[#1a3a6b] mb-2 font-semibold">
-                    {cert.title}
-                  </h3>
-                  <p className="text-sm text-[#dc2626] mb-3">
-                    {cert.subtitle}
-                  </p>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {cert.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Accreditations */}
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <Shield
-                className="text-[#1a3a6b] mx-auto mb-4"
-                size={48}
-              />
-              <h3 className="text-3xl text-[#1a3a6b] mb-4 font-semibold">
-                การรับรองระดับมืออาชีพ
-              </h3>
-              <p className="text-lg text-gray-600">
-                ได้รับการยอมรับจากองค์กรชั้นนำในอุตสาหกรรม
-              </p>
-            </motion.div>
-
-            <div className="grid sm:grid-cols-2 gap-6">
-              {accreditations.map((accreditation, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.1,
-                  }}
-                  className="flex items-center gap-4 bg-gray-50 p-6 rounded-lg"
-                >
-                  <CheckCircle
-                    className="text-[#dc2626] flex-shrink-0"
-                    size={24}
-                  />
-                  <p className="text-gray-700">
-                    {accreditation}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Our Customers Section */}
-      <OurCustomers />
+{/* Our Customers Section */}
+<OurCustomers />
     </div>
   );
 }
