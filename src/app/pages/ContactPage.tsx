@@ -1,6 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Phone, Mail, MapPin, MessageCircle, Facebook, Clock, Send } from 'lucide-react';
+import {
+  Phone,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Facebook,
+  Clock,
+  Send,
+  CheckCircle2,
+} from 'lucide-react';
 
 export function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,18 +22,32 @@ export function ContactPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [showToast, setShowToast] = useState(false);
+
+  const phoneNumber = '0812345678';
+
+  const handleCopyLine = async () => {
+    try {
+      await navigator.clipboard.writeText(phoneNumber);
+      setShowToast(true);
+
+      setTimeout(() => {
+        setShowToast(false);
+      }, 2200);
+    } catch (error) {
+      console.error('Copy failed:', error);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', company: '', message: '' });
 
-      // Reset status after 3 seconds
       setTimeout(() => {
         setSubmitStatus('idle');
       }, 3000);
@@ -49,8 +72,8 @@ export function ContactPage() {
     {
       icon: MessageCircle,
       title: 'LINE',
-      value: '@ntpelectric',
-      href: 'https://line.me/ti/p/~ntpelectric',
+      value: '081-375-2024',
+      onClick: handleCopyLine,
       color: 'bg-[#00B900]',
     },
     {
@@ -99,16 +122,35 @@ export function ContactPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactMethods.map((method, index) => {
               const Icon = method.icon;
+
+              if ('onClick' in method && method.onClick) {
+                return (
+                  <motion.button
+                    key={index}
+                    type="button"
+                    onClick={method.onClick}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className={`${method.color} text-white p-6 rounded-lg hover:opacity-90 transition-opacity group text-left w-full`}
+                  >
+                    <Icon size={32} className="mb-4" />
+                    <h3 className="text-lg font-semibold mb-2">{method.title}</h3>
+                    <p className="text-white/90">{method.value}</p>
+                  </motion.button>
+                );
+              }
+
               return (
                 <motion.a
                   key={index}
                   href={method.href}
-                  target={method.href.startsWith('http') ? '_blank' : undefined}
-                  rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  target={method.href?.startsWith('http') ? '_blank' : undefined}
+                  rel={method.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`${method.color} text-white p-6 rounded-lg hover:opacity-90 transition-opacity group`}
+                  className={`${method.color} text-white p-6 rounded-lg hover:opacity-90 transition-opacity group block`}
                 >
                   <Icon size={32} className="mb-4" />
                   <h3 className="text-lg font-semibold mb-2">{method.title}</h3>
@@ -255,7 +297,7 @@ export function ContactPage() {
               {/* Office Information */}
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <h3 className="text-2xl text-[#1a3a6b] mb-6 font-semibold">ข้อมูลสำนักงาน</h3>
-                
+
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-[#1a3a6b] rounded-lg flex items-center justify-center flex-shrink-0">
@@ -264,9 +306,11 @@ export function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">ที่อยู่</h4>
                       <p className="text-gray-600 leading-relaxed">
-                       333/51 หมู่ 19<br />
-                        ตำบลบางพลีใหญ่ อำเภอบางพลี <br />
-                        สมุทรปราการ 10540 
+                        333/51 หมู่ 19
+                        <br />
+                        ตำบลบางพลีใหญ่ อำเภอบางพลี
+                        <br />
+                        สมุทรปราการ 10540
                       </p>
                     </div>
                   </div>
@@ -278,7 +322,8 @@ export function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">เวลาทำการ</h4>
                       <p className="text-gray-600">
-                        จันทร์ - เสาร์: 08:00 - 17:00<br />
+                        จันทร์ - เสาร์: 08:00 - 17:00
+                        <br />
                         อาทิตย์: ปิดทำการ
                       </p>
                     </div>
@@ -291,9 +336,10 @@ export function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">สายด่วนฉุกเฉิน</h4>
                       <p className="text-gray-600">
-                        24/7 Emergency Support<br />
-                        <a href="tel:+66812345678" className="text-[#dc2626] hover:underline">
-                          +66 (0) 81-234-5678
+                        24/7 Emergency Support
+                        <br />
+                        <a href="tel:+66813752024" className="text-[#dc2626] hover:underline">
+                          +66 (0) 81-375-2024
                         </a>
                       </p>
                     </div>
@@ -306,7 +352,7 @@ export function ContactPage() {
                 <h3 className="text-2xl text-[#1a3a6b] mb-6 font-semibold">แผนที่</h3>
                 <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.0!2d100.6!3d13.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ1JzAwLjAiTiAxMDDCsDM2JzAwLjAiRQ!5e0!3m2!1sen!2sth!4v1234567890"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3878.684169141496!2d100.71553019999999!3d13.554955999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d5b87b2fa8825%3A0x4a3fdd9534b670b2!2z4Lia4Lij4Li04Lip4Lix4LiXIOC5gOC4reC5h-C4meC4l-C4teC4nuC4tSDguK3guLTguYDguKXguYfguITguJfguKPguLTguITguYHguK3guJnguJTguYzguYDguK3guYfguJnguIjguLTguYDguJnguLXguKLguKPguLTguYjguIcg4LiI4Liz4LiB4Lix4LiU!5e0!3m2!1sth!2sth!4v1774075855898!5m2!1sth!2sth"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -321,6 +367,27 @@ export function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Toast */}
+      <div
+        className={`fixed left-1/2 -translate-x-1/2 bottom-24 lg:bottom-8 z-[60] transition-all duration-300 ${
+          showToast
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-3 pointer-events-none'
+        }`}
+      >
+        <div className="flex items-center gap-3 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-gray-200 px-4 py-3 min-w-[260px]">
+          <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+            <CheckCircle2 size={20} className="text-green-600" />
+          </div>
+          <div className="text-left">
+            <p className="text-sm font-semibold text-gray-900">
+              คัดลอกไปยังคลิปบอร์ดแล้ว
+            </p>
+            <p className="text-xs text-gray-500">081-375-2024</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

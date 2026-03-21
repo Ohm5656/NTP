@@ -40,13 +40,25 @@ export function ProjectCard({
           </span>
         </div>
 
-        <div className="relative h-72 overflow-hidden bg-slate-100">
+<div className="relative h-72 overflow-hidden bg-slate-100 rounded-2xl">
+  {/* Image */}
   <ImageWithFallback
     src={project.coverImage}
     alt={project.titleTh}
-    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+    className="h-full w-full object-cover transition-all duration-700 ease-out 
+               group-hover:scale-[1.04]"
   />
-  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/10 via-transparent to-transparent" />
+
+  {/* Dark Gradient (เพิ่ม contrast) */}
+  <div className="absolute inset-0 bg-gradient-to-t 
+    from-black/40 via-black/10 to-transparent" />
+
+  {/* Top Highlight (ทำให้ดูแพงขึ้น) */}
+  <div className="absolute inset-0 bg-gradient-to-b 
+    from-white/20 via-transparent to-transparent opacity-60" />
+
+  {/* Inner Shadow (depth) */}
+  <div className="absolute inset-0 shadow-[inset_0_-60px_80px_-20px_rgba(0,0,0,0.6)]" />
 </div>
       </div>
 

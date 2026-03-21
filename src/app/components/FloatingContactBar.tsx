@@ -1,27 +1,52 @@
-import { Phone, Mail, MessageCircle, Facebook } from 'lucide-react';
+import { useState } from 'react';
+import { Phone, Mail, MessageCircle, Facebook, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function FloatingContactBar() {
+  const phoneNumber = '0813752024';
+  const [showToast, setShowToast] = useState(false);
+
+  const handleCopyLine = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+      await navigator.clipboard.writeText(phoneNumber);
+      setShowToast(true);
+
+      window.setTimeout(() => {
+        setShowToast(false);
+      }, 2200);
+    } catch (error) {
+      console.error('Copy failed:', error);
+    }
+  };
+
   const contacts = [
     {
+      type: 'link' as const,
       icon: Phone,
       label: 'โทร',
-      href: 'tel:+66812345678',
+      href: 'tel:+66813752024',
       color: 'bg-green-600 hover:bg-green-700',
     },
     {
+      type: 'action' as const,
       icon: MessageCircle,
       label: 'LINE',
-      href: 'https://line.me/ti/p/~ntpelectric',
       color: 'bg-[#00B900] hover:bg-[#00A000]',
     },
     {
+      type: 'link' as const,
       icon: Facebook,
       label: 'Facebook',
       href: 'https://facebook.com/ntpelectric',
       color: 'bg-[#1877F2] hover:bg-[#0C63D4]',
     },
     {
+      type: 'link' as const,
       icon: Mail,
       label: 'อีเมล',
       href: 'mailto:ntpelectric2017@gmail.com',
@@ -40,6 +65,25 @@ export function FloatingContactBar() {
       >
         {contacts.map((contact, index) => {
           const Icon = contact.icon;
+
+          if (contact.type === 'action') {
+            return (
+              <button
+                key={index}
+                type="button"
+                onClick={handleCopyLine}
+                className={`${contact.color} text-white p-4 transition-all duration-300 group flex items-center shadow-lg border-0`}
+                title="คัดลอกเบอร์ LINE"
+                aria-label="คัดลอกเบอร์ LINE"
+              >
+                <Icon size={24} />
+                <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-3 transition-all duration-300 whitespace-nowrap">
+                  {contact.label}
+                </span>
+              </button>
+            );
+          }
+
           return (
             <a
               key={index}
@@ -68,6 +112,26 @@ export function FloatingContactBar() {
         <div className="grid grid-cols-4 gap-0">
           {contacts.map((contact, index) => {
             const Icon = contact.icon;
+
+            if (contact.type === 'action') {
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={handleCopyLine}
+                  className="flex flex-col items-center justify-center py-4 px-2 hover:bg-gray-50 transition-colors gap-1 border-r last:border-r-0 border-gray-100"
+                  aria-label="คัดลอกเบอร์ LINE"
+                >
+                  <div className={`p-2 rounded-full ${contact.color} text-white`}>
+                    <Icon size={20} />
+                  </div>
+                  <span className="text-[10px] font-bold text-gray-600 uppercase tracking-tight">
+                    {contact.label}
+                  </span>
+                </button>
+              );
+            }
+
             return (
               <a
                 key={index}
@@ -79,12 +143,35 @@ export function FloatingContactBar() {
                 <div className={`p-2 rounded-full ${contact.color} text-white`}>
                   <Icon size={20} />
                 </div>
-                <span className="text-[10px] font-bold text-gray-600 uppercase tracking-tight">{contact.label}</span>
+                <span className="text-[10px] font-bold text-gray-600 uppercase tracking-tight">
+                  {contact.label}
+                </span>
               </a>
             );
           })}
         </div>
       </motion.div>
+
+      {/* Toast */}
+      <div
+        className={`fixed left-1/2 -translate-x-1/2 bottom-28 lg:bottom-8 z-[60] transition-all duration-300 ${
+          showToast
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-3 pointer-events-none'
+        }`}
+      >
+        <div className="flex items-center gap-3 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-gray-200 px-4 py-3 min-w-[260px]">
+          <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+            <CheckCircle2 size={20} className="text-green-600" />
+          </div>
+          <div className="text-left">
+            <p className="text-sm font-semibold text-gray-900">
+              คัดลอกไปยังคลิปบอร์ดแล้ว
+            </p>
+            <p className="text-xs text-gray-500">081-375-2024</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

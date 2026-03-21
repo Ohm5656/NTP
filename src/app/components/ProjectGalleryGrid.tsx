@@ -14,15 +14,13 @@ export function ProjectGalleryGrid({
   projects,
   className,
 }: ProjectGalleryGridProps) {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(
-    null,
-  );
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <>
       <div
         className={cn(
-          "grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-x-10 md:gap-y-16",
+          "grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 md:gap-x-7 md:gap-y-12 xl:grid-cols-3 xl:gap-x-8 xl:gap-y-14",
           className,
         )}
       >

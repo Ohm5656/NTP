@@ -25,9 +25,7 @@ export function ProjectGalleryModal({
   project,
   onOpenChange,
 }: ProjectGalleryModalProps) {
-  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(
-    null,
-  );
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (!open) {
@@ -62,7 +60,7 @@ export function ProjectGalleryModal({
         );
       }
     } catch {
-      // User cancelled the share flow or the browser blocked clipboard access.
+      // ignore
     }
   };
 
@@ -84,7 +82,7 @@ export function ProjectGalleryModal({
 
               <DialogPrimitive.Content asChild forceMount>
                 <motion.div
-                  className="fixed inset-0 z-[80] overflow-hidden bg-[#f5f8fc] outline-none sm:inset-y-4 sm:left-1/2 sm:w-[min(calc(100vw-2rem),1400px)] sm:-translate-x-1/2 sm:rounded-[32px] sm:border sm:border-white/70 sm:shadow-[0_40px_120px_-48px_rgba(15,23,42,0.35)] lg:inset-y-8 lg:w-[min(calc(100vw-4rem),1400px)]"
+                  className="fixed inset-0 z-[80] overflow-hidden bg-[#f5f8fc] outline-none sm:inset-y-4 sm:left-1/2 sm:w-[min(calc(100vw-2rem),1360px)] sm:-translate-x-1/2 sm:rounded-[30px] sm:border sm:border-white/70 sm:shadow-[0_40px_120px_-48px_rgba(15,23,42,0.35)] lg:inset-y-8 lg:w-[min(calc(100vw-4rem),1360px)]"
                   initial={{ opacity: 0, y: 28, scale: 0.985 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 24, scale: 0.985 }}
@@ -110,11 +108,10 @@ export function ProjectGalleryModal({
                       </DialogPrimitive.Close>
 
                       <div className="min-w-0 px-1 text-center">
-                        <p className="truncate text-[11px] font-semibold uppercase tracking-[0.28em] text-[#dc2626]">
+                        <p className="truncate text-[13px] font-semibold tracking-[0.12em] text-[#dc2626] mb-1 sm:text-[14px]">
                           {project.categoryTh}
                         </p>
-                        <h2 className="truncate text-base font-semibold tracking-tight text-[#1a3a6b] sm:text-xl">
-                          {project.titleTh}
+                      <h2 className="truncate text-[17px] font-semibold leading-tight tracking-tight text-[#1a3a6b] sm:text-[20px] lg:text-[22px]">                          {project.titleTh}
                         </h2>
                       </div>
 
@@ -127,6 +124,7 @@ export function ProjectGalleryModal({
                         >
                           <Share2 size={18} />
                         </button>
+
                         <a
                           href={project.coverImage}
                           download
@@ -141,18 +139,19 @@ export function ProjectGalleryModal({
                     </div>
 
                     <div className="flex-1 overflow-y-auto">
-                      <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-6 px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
-                        <section className="grid gap-5 rounded-[30px] border border-white/70 bg-white p-5 shadow-[0_26px_90px_-42px_rgba(15,23,42,0.32)] lg:grid-cols-[minmax(0,1.1fr)_420px] lg:items-center lg:gap-8 lg:p-8">
-                          <div className="space-y-5">
+                      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
+                        <section className="grid gap-5 rounded-[28px] border border-white/70 bg-white p-5 shadow-[0_26px_90px_-42px_rgba(15,23,42,0.32)] lg:grid-cols-[minmax(0,1.05fr)_400px] lg:items-center lg:gap-7 lg:p-7">
+                          <div className="space-y-4">
                             <div className="inline-flex items-center gap-2 rounded-full border border-[#1a3a6b]/10 bg-[#1a3a6b]/5 px-4 py-2 text-sm font-medium text-[#1a3a6b]">
                               <Images size={16} />
                               แกลเลอรีโครงการ {project.images.length} ภาพ
                             </div>
 
-                            <div className="space-y-3">
-                              <h3 className="text-2xl font-semibold tracking-tight text-[#1a3a6b] sm:text-3xl lg:text-[2.25rem]">
+                            <div className="space-y-2.5">
+                              <h3 className="text-[1.85rem] font-semibold leading-tight tracking-tight text-[#1a3a6b] sm:text-[2rem] lg:text-[2.15rem]">
                                 {project.titleTh}
                               </h3>
+
                               <p className="max-w-3xl text-sm leading-7 text-slate-600 sm:text-[15px]">
                                 {project.descriptionTh}
                               </p>
@@ -161,45 +160,40 @@ export function ProjectGalleryModal({
                             <div className="flex flex-wrap gap-3">
                               {project.locationTh ?? project.location ? (
                                 <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-600">
-                                  <MapPin
-                                    size={16}
-                                    className="text-[#dc2626]"
-                                  />
+                                  <MapPin size={16} className="text-[#dc2626]" />
                                   {project.locationTh ?? project.location}
                                 </div>
                               ) : null}
 
                               {project.year ? (
                                 <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-600">
-                                  <CalendarDays
-                                    size={16}
-                                    className="text-[#dc2626]"
-                                  />
+                                  <CalendarDays size={16} className="text-[#dc2626]" />
                                   {project.year}
                                 </div>
                               ) : null}
                             </div>
                           </div>
 
-                          <div className="overflow-hidden rounded-[28px] border border-[#1a3a6b]/8 bg-slate-100 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.4)]">
+                          <div className="overflow-hidden rounded-[26px] border border-[#1a3a6b]/8 bg-slate-100 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.4)]">
                             <ImageWithFallback
                               src={project.coverImage}
                               alt={project.titleTh}
-                              className="h-full max-h-[360px] w-full object-cover lg:max-h-[420px]"
+                              className="h-full max-h-[340px] w-full object-cover lg:max-h-[400px]"
                             />
                           </div>
                         </section>
 
-                        <section className="rounded-[30px] border border-white/70 bg-white p-4 shadow-[0_24px_80px_-42px_rgba(15,23,42,0.3)] sm:p-5 lg:p-6">
+                        <section className="rounded-[28px] border border-white/70 bg-white p-4 shadow-[0_24px_80px_-42px_rgba(15,23,42,0.3)] sm:p-5 lg:p-6">
                           <div className="mb-5 flex items-center justify-between gap-4">
                             <div>
-                              <h3 className="text-lg font-semibold text-[#1a3a6b] sm:text-xl">
+                              <h3 className="text-lg font-semibold text-[#1a3a6b] sm:text-[1.15rem]">
                                 Project Gallery
                               </h3>
                               <p className="text-sm text-slate-500">
                                 แตะหรือคลิกเพื่อดูภาพขนาดใหญ่
                               </p>
                             </div>
+
                             <div className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-600">
                               {project.images.length} images
                             </div>
@@ -213,10 +207,10 @@ export function ProjectGalleryModal({
                                 whileHover={{ y: -4 }}
                                 transition={{ duration: 0.18 }}
                                 onClick={() => setActiveImageIndex(index)}
-                                className="group mb-4 w-full break-inside-avoid overflow-hidden rounded-[26px] border border-slate-200 bg-[#f8fafc] p-2 text-left shadow-[0_16px_40px_-28px_rgba(15,23,42,0.28)] transition-colors hover:border-[#1a3a6b]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dc2626] focus-visible:ring-offset-2 sm:mb-5"
+                                className="group mb-4 w-full break-inside-avoid overflow-hidden rounded-[24px] border border-slate-200 bg-[#f8fafc] p-2 text-left shadow-[0_16px_40px_-28px_rgba(15,23,42,0.28)] transition-colors hover:border-[#1a3a6b]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dc2626] focus-visible:ring-offset-2 sm:mb-5"
                                 aria-label={`เปิดภาพที่ ${index + 1} ของโครงการ ${project.titleTh}`}
                               >
-                                <div className="overflow-hidden rounded-[22px] bg-slate-100">
+                                <div className="overflow-hidden rounded-[20px] bg-slate-100">
                                   <ImageWithFallback
                                     src={image}
                                     alt={`${project.titleTh} ${index + 1}`}
@@ -233,6 +227,7 @@ export function ProjectGalleryModal({
                                       Tap to preview
                                     </p>
                                   </div>
+
                                   <div className="rounded-full border border-[#1a3a6b]/10 bg-white px-3 py-1 text-xs font-semibold text-[#1a3a6b]">
                                     {index + 1}/{project.images.length}
                                   </div>
