@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -14,31 +14,102 @@ export function NewFooter() {
 
   const [showToast, setShowToast] = useState(false);
   const [copiedText, setCopiedText] = useState('');
+  const toastTimerRef = useRef<number | null>(null);
 
   const showCopyToast = (value: string) => {
     setCopiedText(value);
     setShowToast(true);
 
-    window.setTimeout(() => {
+    if (toastTimerRef.current) {
+      window.clearTimeout(toastTimerRef.current);
+    }
+
+    toastTimerRef.current = window.setTimeout(() => {
       setShowToast(false);
     }, 2200);
   };
 
-  const handleCopyLine = async () => {
+  const fallbackCopyText = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.setAttribute('readonly', '');
+    textArea.style.position = 'fixed';
+    textArea.style.top = '0';
+    textArea.style.left = '0';
+    textArea.style.opacity = '0';
+    textArea.style.pointerEvents = 'none';
+    textArea.style.zIndex = '-1';
+
+    document.body.appendChild(textArea);
+
+    const selection = document.getSelection();
+    const selectedRange =
+      selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+
+    textArea.focus();
+    textArea.select();
+    textArea.setSelectionRange(0, text.length);
+
+    let copied = false;
+
     try {
-      await navigator.clipboard.writeText(lineNumber);
-      showCopyToast('081-375-2024');
+      copied = document.execCommand('copy');
     } catch (error) {
-      console.error('Copy line failed:', error);
+      console.error('Fallback copy failed:', error);
+      copied = false;
+    }
+
+    document.body.removeChild(textArea);
+
+    if (selectedRange && selection) {
+      selection.removeAllRanges();
+      selection.addRange(selectedRange);
+    }
+
+    return copied;
+  };
+
+  const copyToClipboard = async (text: string, successLabel: string) => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        showCopyToast(successLabel);
+        return true;
+      }
+
+      const copied = fallbackCopyText(text);
+      if (copied) {
+        showCopyToast(successLabel);
+        return true;
+      }
+
+      return false;
+    } catch (error) {
+      console.error('Clipboard API copy failed, trying fallback:', error);
+
+      const copied = fallbackCopyText(text);
+      if (copied) {
+        showCopyToast(successLabel);
+        return true;
+      }
+
+      return false;
+    }
+  };
+
+  const handleCopyLine = async () => {
+    const success = await copyToClipboard(lineNumber, '081-375-2024');
+
+    if (!success) {
+      console.error('Copy line failed');
     }
   };
 
   const handleCopyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(emailAddress);
-      showCopyToast(emailAddress);
-    } catch (error) {
-      console.error('Copy email failed:', error);
+    const success = await copyToClipboard(emailAddress, emailAddress);
+
+    if (!success) {
+      console.error('Copy email failed');
     }
   };
 
@@ -118,6 +189,7 @@ export function NewFooter() {
                     type="button"
                     onClick={handleCopyEmail}
                     className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group text-left bg-transparent border-0 p-0"
+                    aria-label="คัดลอกอีเมล"
                   >
                     <Mail size={18} className="flex-shrink-0" />
                     <span>{emailAddress}</span>
@@ -127,6 +199,7 @@ export function NewFooter() {
                     type="button"
                     onClick={handleCopyLine}
                     className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group text-left bg-transparent border-0 p-0"
+                    aria-label="คัดลอกเบอร์ LINE"
                   >
                     <MessageCircle size={18} className="flex-shrink-0" />
                     <span>081-375-2024</span>

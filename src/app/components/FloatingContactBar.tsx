@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Phone, Mail, MessageCircle, Facebook, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -8,41 +8,108 @@ export function FloatingContactBar() {
 
   const [showToast, setShowToast] = useState(false);
   const [copiedText, setCopiedText] = useState('');
+  const toastTimerRef = useRef<number | null>(null);
 
   const showCopyToast = (value: string) => {
     setCopiedText(value);
     setShowToast(true);
 
-    window.setTimeout(() => {
+    if (toastTimerRef.current) {
+      window.clearTimeout(toastTimerRef.current);
+    }
+
+    toastTimerRef.current = window.setTimeout(() => {
       setShowToast(false);
     }, 2200);
   };
 
-  const handleCopyLine = async (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const fallbackCopyText = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.setAttribute('readonly', '');
+    textArea.style.position = 'fixed';
+    textArea.style.top = '0';
+    textArea.style.left = '0';
+    textArea.style.opacity = '0';
+    textArea.style.pointerEvents = 'none';
+    textArea.style.zIndex = '-1';
+
+    document.body.appendChild(textArea);
+
+    const selection = document.getSelection();
+    const selectedRange =
+      selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+
+    textArea.focus();
+    textArea.select();
+    textArea.setSelectionRange(0, text.length);
+
+    let copied = false;
 
     try {
-      await navigator.clipboard.writeText(lineNumber);
-      showCopyToast('081-375-2024');
+      copied = document.execCommand('copy');
     } catch (error) {
-      console.error('Copy line failed:', error);
+      console.error('Fallback copy failed:', error);
+      copied = false;
+    }
+
+    document.body.removeChild(textArea);
+
+    if (selectedRange && selection) {
+      selection.removeAllRanges();
+      selection.addRange(selectedRange);
+    }
+
+    return copied;
+  };
+
+  const copyToClipboard = async (text: string, successLabel: string) => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        showCopyToast(successLabel);
+        return true;
+      }
+
+      const copied = fallbackCopyText(text);
+      if (copied) {
+        showCopyToast(successLabel);
+        return true;
+      }
+
+      return false;
+    } catch (error) {
+      console.error('Clipboard API copy failed, trying fallback:', error);
+
+      const copied = fallbackCopyText(text);
+      if (copied) {
+        showCopyToast(successLabel);
+        return true;
+      }
+
+      return false;
     }
   };
 
-  const handleCopyEmail = async (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleCopyLine = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
-    try {
-      await navigator.clipboard.writeText(emailAddress);
-      showCopyToast(emailAddress);
-    } catch (error) {
-      console.error('Copy email failed:', error);
+    const success = await copyToClipboard(lineNumber, '081-375-2024');
+
+    if (!success) {
+      console.error('Copy line failed');
+    }
+  };
+
+  const handleCopyEmail = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const success = await copyToClipboard(emailAddress, emailAddress);
+
+    if (!success) {
+      console.error('Copy email failed');
     }
   };
 

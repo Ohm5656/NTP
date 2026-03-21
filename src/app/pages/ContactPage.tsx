@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import {
   Phone,
@@ -24,6 +24,7 @@ export function ContactPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [showToast, setShowToast] = useState(false);
   const [copiedText, setCopiedText] = useState('');
+  const toastTimerRef = useRef<number | null>(null);
 
   const lineNumber = '0813752024';
   const emailAddress = 'ntpelectric2017@gmail.com';
@@ -32,26 +33,96 @@ export function ContactPage() {
     setCopiedText(value);
     setShowToast(true);
 
-    window.setTimeout(() => {
+    if (toastTimerRef.current) {
+      window.clearTimeout(toastTimerRef.current);
+    }
+
+    toastTimerRef.current = window.setTimeout(() => {
       setShowToast(false);
     }, 2200);
   };
 
-  const handleCopyLine = async () => {
+  const fallbackCopyText = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.setAttribute('readonly', '');
+    textArea.style.position = 'fixed';
+    textArea.style.top = '0';
+    textArea.style.left = '0';
+    textArea.style.opacity = '0';
+    textArea.style.pointerEvents = 'none';
+    textArea.style.zIndex = '-1';
+
+    document.body.appendChild(textArea);
+
+    const selection = document.getSelection();
+    const selectedRange =
+      selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+
+    textArea.focus();
+    textArea.select();
+    textArea.setSelectionRange(0, text.length);
+
+    let copied = false;
+
     try {
-      await navigator.clipboard.writeText(lineNumber);
-      showCopyToast('081-375-2024');
+      copied = document.execCommand('copy');
     } catch (error) {
-      console.error('Copy line failed:', error);
+      console.error('Fallback copy failed:', error);
+      copied = false;
+    }
+
+    document.body.removeChild(textArea);
+
+    if (selectedRange && selection) {
+      selection.removeAllRanges();
+      selection.addRange(selectedRange);
+    }
+
+    return copied;
+  };
+
+  const copyToClipboard = async (text: string, successLabel: string) => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        showCopyToast(successLabel);
+        return true;
+      }
+
+      const copied = fallbackCopyText(text);
+      if (copied) {
+        showCopyToast(successLabel);
+        return true;
+      }
+
+      return false;
+    } catch (error) {
+      console.error('Clipboard API copy failed, trying fallback:', error);
+
+      const copied = fallbackCopyText(text);
+      if (copied) {
+        showCopyToast(successLabel);
+        return true;
+      }
+
+      return false;
+    }
+  };
+
+  const handleCopyLine = async () => {
+    const success = await copyToClipboard(lineNumber, '081-375-2024');
+
+    if (!success) {
+      console.error('Copy line failed');
     }
   };
 
   const handleCopyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(emailAddress);
-      showCopyToast(emailAddress);
-    } catch (error) {
-      console.error('Copy email failed:', error);
+    const success = await copyToClipboard(emailAddress, emailAddress);
+
+    if (!success) {
+      console.error('Copy email failed');
     }
   };
 
@@ -147,6 +218,7 @@ export function ContactPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className={`${method.color} text-white p-6 rounded-lg hover:opacity-90 transition-opacity group text-left w-full`}
+                    aria-label={method.title === 'อีเมล' ? 'คัดลอกอีเมล' : 'คัดลอกเบอร์ LINE'}
                   >
                     <Icon size={32} className="mb-4" />
                     <h3 className="text-lg font-semibold mb-2">{method.title}</h3>
