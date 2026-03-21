@@ -9,19 +9,36 @@ export function NewFooter() {
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
 
+  const lineNumber = '0813752024';
+  const emailAddress = 'ntpelectric2017@gmail.com';
+
   const [showToast, setShowToast] = useState(false);
-  const phoneNumber = '0812345678';
+  const [copiedText, setCopiedText] = useState('');
+
+  const showCopyToast = (value: string) => {
+    setCopiedText(value);
+    setShowToast(true);
+
+    window.setTimeout(() => {
+      setShowToast(false);
+    }, 2200);
+  };
 
   const handleCopyLine = async () => {
     try {
-      await navigator.clipboard.writeText(phoneNumber);
-      setShowToast(true);
-
-      window.setTimeout(() => {
-        setShowToast(false);
-      }, 2200);
+      await navigator.clipboard.writeText(lineNumber);
+      showCopyToast('081-375-2024');
     } catch (error) {
-      console.error('Copy failed:', error);
+      console.error('Copy line failed:', error);
+    }
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      showCopyToast(emailAddress);
+    } catch (error) {
+      console.error('Copy email failed:', error);
     }
   };
 
@@ -67,7 +84,6 @@ export function NewFooter() {
       <footer className="bg-[#1a3a6b] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {/* Company Info */}
             <div className="lg:col-span-2">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -89,23 +105,23 @@ export function NewFooter() {
                   และงานระบบไฟฟ้าห้องเย็น
                 </p>
 
-                {/* Contact Info */}
                 <div className="space-y-3">
                   <a
-                    href="tel:+66812345678"
+                    href="tel:+66813752024"
                     className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
                   >
                     <Phone size={18} className="flex-shrink-0" />
-                    <span>+66 (0) 81-234-5678</span>
+                    <span>+66 (0) 81-375-2024</span>
                   </a>
 
-                  <a
-                    href="mailto:info@ntpelectric.com"
-                    className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group text-left bg-transparent border-0 p-0"
                   >
                     <Mail size={18} className="flex-shrink-0" />
-                    <span>ntpelectric2017@gmail.com</span>
-                  </a>
+                    <span>{emailAddress}</span>
+                  </button>
 
                   <button
                     type="button"
@@ -113,7 +129,7 @@ export function NewFooter() {
                     className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group text-left bg-transparent border-0 p-0"
                   >
                     <MessageCircle size={18} className="flex-shrink-0" />
-                    <span>081-234-5678</span>
+                    <span>081-375-2024</span>
                   </button>
 
                   <div className="flex items-start gap-3 text-white/80">
@@ -126,7 +142,6 @@ export function NewFooter() {
               </motion.div>
             </div>
 
-            {/* Quick Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -167,7 +182,6 @@ export function NewFooter() {
               </ul>
             </motion.div>
 
-            {/* Services */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -183,7 +197,6 @@ export function NewFooter() {
             </motion.div>
           </div>
 
-          {/* Bottom Bar */}
           <div className="border-t border-white/20 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-white/60 text-sm text-center md:text-left">
@@ -195,7 +208,6 @@ export function NewFooter() {
         </div>
       </footer>
 
-      {/* Toast */}
       <div
         className={`fixed left-1/2 -translate-x-1/2 bottom-24 lg:bottom-8 z-[60] transition-all duration-300 ${
           showToast
@@ -213,7 +225,7 @@ export function NewFooter() {
               คัดลอกไปยังคลิปบอร์ดแล้ว
             </p>
             <p className="text-[14px] text-gray-600 leading-tight mt-1">
-              081-234-5678
+              {copiedText}
             </p>
           </div>
         </div>

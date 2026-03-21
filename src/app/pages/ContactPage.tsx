@@ -23,19 +23,35 @@ export function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [showToast, setShowToast] = useState(false);
+  const [copiedText, setCopiedText] = useState('');
 
-  const phoneNumber = '0812345678';
+  const lineNumber = '0813752024';
+  const emailAddress = 'ntpelectric2017@gmail.com';
+
+  const showCopyToast = (value: string) => {
+    setCopiedText(value);
+    setShowToast(true);
+
+    window.setTimeout(() => {
+      setShowToast(false);
+    }, 2200);
+  };
 
   const handleCopyLine = async () => {
     try {
-      await navigator.clipboard.writeText(phoneNumber);
-      setShowToast(true);
-
-      setTimeout(() => {
-        setShowToast(false);
-      }, 2200);
+      await navigator.clipboard.writeText(lineNumber);
+      showCopyToast('081-375-2024');
     } catch (error) {
-      console.error('Copy failed:', error);
+      console.error('Copy line failed:', error);
+    }
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      showCopyToast(emailAddress);
+    } catch (error) {
+      console.error('Copy email failed:', error);
     }
   };
 
@@ -65,8 +81,8 @@ export function ContactPage() {
     {
       icon: Phone,
       title: 'โทรศัพท์',
-      value: '+66 (0) 81-234-5678',
-      href: 'tel:+66812345678',
+      value: '+66 (0) 81-375-2024',
+      href: 'tel:+66813752024',
       color: 'bg-green-600',
     },
     {
@@ -86,15 +102,14 @@ export function ContactPage() {
     {
       icon: Mail,
       title: 'อีเมล',
-      value: 'ntpelectric2017@gmail.com',
-      href: 'mailto:ntpelectric2017@gmail.com',
+      value: emailAddress,
+      onClick: handleCopyEmail,
       color: 'bg-[#dc2626]',
     },
   ];
 
   return (
     <div className="min-h-screen pt-20 pb-32 lg:pb-20">
-      {/* Header Section */}
       <section className="bg-[#1a3a6b] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
@@ -116,7 +131,6 @@ export function ContactPage() {
         </div>
       </section>
 
-      {/* Contact Methods Grid */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -162,11 +176,9 @@ export function ContactPage() {
         </div>
       </section>
 
-      {/* Main Contact Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -208,7 +220,7 @@ export function ContactPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#dc2626] focus:border-transparent transition-colors"
-                      placeholder="081-234-5678"
+                      placeholder="081-375-2024"
                     />
                   </div>
 
@@ -287,14 +299,12 @@ export function ContactPage() {
               </form>
             </motion.div>
 
-            {/* Contact Information */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               className="space-y-8"
             >
-              {/* Office Information */}
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <h3 className="text-2xl text-[#1a3a6b] mb-6 font-semibold">ข้อมูลสำนักงาน</h3>
 
@@ -347,7 +357,6 @@ export function ContactPage() {
                 </div>
               </div>
 
-              {/* Map */}
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <h3 className="text-2xl text-[#1a3a6b] mb-6 font-semibold">แผนที่</h3>
                 <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
@@ -368,7 +377,6 @@ export function ContactPage() {
         </div>
       </section>
 
-      {/* Toast */}
       <div
         className={`fixed left-1/2 -translate-x-1/2 bottom-24 lg:bottom-8 z-[60] transition-all duration-300 ${
           showToast
@@ -384,7 +392,7 @@ export function ContactPage() {
             <p className="text-sm font-semibold text-gray-900">
               คัดลอกไปยังคลิปบอร์ดแล้ว
             </p>
-            <p className="text-xs text-gray-500">081-375-2024</p>
+            <p className="text-xs text-gray-500">{copiedText}</p>
           </div>
         </div>
       </div>

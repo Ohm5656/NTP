@@ -3,8 +3,20 @@ import { Phone, Mail, MessageCircle, Facebook, CheckCircle2 } from 'lucide-react
 import { motion } from 'motion/react';
 
 export function FloatingContactBar() {
-  const phoneNumber = '0813752024';
+  const lineNumber = '0813752024';
+  const emailAddress = 'ntpelectric2017@gmail.com';
+
   const [showToast, setShowToast] = useState(false);
+  const [copiedText, setCopiedText] = useState('');
+
+  const showCopyToast = (value: string) => {
+    setCopiedText(value);
+    setShowToast(true);
+
+    window.setTimeout(() => {
+      setShowToast(false);
+    }, 2200);
+  };
 
   const handleCopyLine = async (
     e: React.MouseEvent<HTMLButtonElement>
@@ -13,14 +25,24 @@ export function FloatingContactBar() {
     e.stopPropagation();
 
     try {
-      await navigator.clipboard.writeText(phoneNumber);
-      setShowToast(true);
-
-      window.setTimeout(() => {
-        setShowToast(false);
-      }, 2200);
+      await navigator.clipboard.writeText(lineNumber);
+      showCopyToast('081-375-2024');
     } catch (error) {
-      console.error('Copy failed:', error);
+      console.error('Copy line failed:', error);
+    }
+  };
+
+  const handleCopyEmail = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      showCopyToast(emailAddress);
+    } catch (error) {
+      console.error('Copy email failed:', error);
     }
   };
 
@@ -36,6 +58,7 @@ export function FloatingContactBar() {
       type: 'action' as const,
       icon: MessageCircle,
       label: 'LINE',
+      onClick: handleCopyLine,
       color: 'bg-[#00B900] hover:bg-[#00A000]',
     },
     {
@@ -46,17 +69,16 @@ export function FloatingContactBar() {
       color: 'bg-[#1877F2] hover:bg-[#0C63D4]',
     },
     {
-      type: 'link' as const,
+      type: 'action' as const,
       icon: Mail,
       label: 'อีเมล',
-      href: 'mailto:ntpelectric2017@gmail.com',
+      onClick: handleCopyEmail,
       color: 'bg-[#dc2626] hover:bg-[#b91c1c]',
     },
   ];
 
   return (
     <>
-      {/* Desktop Floating Bar - Right Side */}
       <motion.div
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -71,10 +93,10 @@ export function FloatingContactBar() {
               <button
                 key={index}
                 type="button"
-                onClick={handleCopyLine}
+                onClick={contact.onClick}
                 className={`${contact.color} text-white p-4 transition-all duration-300 group flex items-center shadow-lg border-0`}
-                title="คัดลอกเบอร์ LINE"
-                aria-label="คัดลอกเบอร์ LINE"
+                title={contact.label === 'อีเมล' ? 'คัดลอกอีเมล' : 'คัดลอกเบอร์ LINE'}
+                aria-label={contact.label === 'อีเมล' ? 'คัดลอกอีเมล' : 'คัดลอกเบอร์ LINE'}
               >
                 <Icon size={24} />
                 <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-3 transition-all duration-300 whitespace-nowrap">
@@ -102,7 +124,6 @@ export function FloatingContactBar() {
         })}
       </motion.div>
 
-      {/* Mobile Floating Bar - Bottom */}
       <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -118,9 +139,9 @@ export function FloatingContactBar() {
                 <button
                   key={index}
                   type="button"
-                  onClick={handleCopyLine}
+                  onClick={contact.onClick}
                   className="flex flex-col items-center justify-center py-4 px-2 hover:bg-gray-50 transition-colors gap-1 border-r last:border-r-0 border-gray-100"
-                  aria-label="คัดลอกเบอร์ LINE"
+                  aria-label={contact.label === 'อีเมล' ? 'คัดลอกอีเมล' : 'คัดลอกเบอร์ LINE'}
                 >
                   <div className={`p-2 rounded-full ${contact.color} text-white`}>
                     <Icon size={20} />
@@ -152,7 +173,6 @@ export function FloatingContactBar() {
         </div>
       </motion.div>
 
-      {/* Toast */}
       <div
         className={`fixed left-1/2 -translate-x-1/2 bottom-28 lg:bottom-8 z-[60] transition-all duration-300 ${
           showToast
@@ -168,7 +188,7 @@ export function FloatingContactBar() {
             <p className="text-sm font-semibold text-gray-900">
               คัดลอกไปยังคลิปบอร์ดแล้ว
             </p>
-            <p className="text-xs text-gray-500">081-375-2024</p>
+            <p className="text-xs text-gray-500">{copiedText}</p>
           </div>
         </div>
       </div>
