@@ -18,12 +18,9 @@ export function ProjectCard({
   return (
     <motion.button
       type="button"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -6 }}
       whileTap={{ scale: 0.985 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.45, delay: index * 0.06 }}
+      transition={{ duration: 0.24 }}
       onClick={() => onClick(project)}
       aria-label={`เปิดแกลเลอรีโครงการ ${project.titleTh}`}
       aria-haspopup="dialog"
@@ -48,6 +45,7 @@ export function ProjectCard({
             src={project.coverImage}
             alt={project.titleTh}
             className="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.04]"
+            loading={index < 6 ? "eager" : "lazy"}
           />
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />

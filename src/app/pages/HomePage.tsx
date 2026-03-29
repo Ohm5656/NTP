@@ -126,6 +126,8 @@ const featuredProjects = featuredProjectIds
             src={hero}
             alt="Electrical Engineering Facility"
             className="w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#1a3a6b]/90 to-[#1a3a6b]/70" />
         </div>
@@ -252,17 +254,12 @@ const featuredProjects = featuredProjectIds
         </Link>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, x: 30 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="relative h-[420px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
-      >
+      <div className="relative h-[420px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
         <ImageWithFallback
           src={myImage}
           alt="Modern Engineering"
           className="w-full h-full object-cover"
+          loading="eager"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
@@ -273,7 +270,7 @@ const featuredProjects = featuredProjectIds
             “ความพึงพอใจของลูกค้า คือหัวใจหลักของงานเรา”
           </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   </div>
 </SectionWrapper>

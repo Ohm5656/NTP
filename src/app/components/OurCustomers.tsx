@@ -58,15 +58,6 @@ export function OurCustomers() {
   {mainLogos.map((logo, index) => (
     <motion.div
       key={index}
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        delay: 0.1 * index,
-      }}
       whileHover={{
         y: -6,
         boxShadow: "0 18px 35px -12px rgba(0, 0, 0, 0.12)",
@@ -77,6 +68,7 @@ export function OurCustomers() {
         src={logo.src}
         alt={logo.name}
         className="h-35 w-auto object-contain"
+        loading="eager"
       />
     </motion.div>
   ))}
@@ -86,5 +78,4 @@ export function OurCustomers() {
     </SectionWrapper>
   );
 }
-
 

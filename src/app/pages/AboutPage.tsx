@@ -80,6 +80,8 @@ const values = [
             src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop"
             alt="Background"
             className="w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
           />
         </div>
 
@@ -168,17 +170,12 @@ const values = [
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative h-[420px] md:h-[520px] rounded-2xl overflow-hidden shadow-2xl"
-            >
+            <div className="relative h-[420px] md:h-[520px] rounded-2xl overflow-hidden shadow-2xl">
               <ImageWithFallback
                 src={myImage}
                 alt="NTP Electric and Engineering"
                 className="w-full h-full object-cover"
+                loading="eager"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
@@ -189,7 +186,7 @@ const values = [
                   “ความพึงพอใจของลูกค้า คือหัวใจหลักของงานเรา”
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
