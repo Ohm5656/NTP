@@ -6,18 +6,18 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![Tailwind](https://img.shields.io/badge/Tailwind-4.1.12-38bdf8)
 
-## 🌟 Features
+##  Features
 
-- ✨ **One-Page Landing** - Smooth scrolling through all major sections
-- 🎨 **Modern Design** - Professional engineering company aesthetic
-- 🌏 **Thai Language** - Full Thai language support with Sarabun font
-- 📱 **Fully Responsive** - Optimized for desktop, tablet, and mobile
-- ⚡ **Smooth Animations** - Professional Motion (Framer Motion) effects
-- 🎯 **SEO Optimized** - Semantic HTML and proper meta tags
-- 🚀 **Fast Performance** - Optimized loading and rendering
-- ♿ **Accessible** - WCAG AA compliant with keyboard navigation
+-  **One-Page Landing** - Smooth scrolling through all major sections
+-  **Modern Design** - Professional engineering company aesthetic
+-  **Thai Language** - Full Thai language support with Sarabun font
+-  **Fully Responsive** - Optimized for desktop, tablet, and mobile
+-  **Smooth Animations** - Professional Motion (Framer Motion) effects
+-  **SEO Optimized** - Semantic HTML and proper meta tags
+-  **Fast Performance** - Optimized loading and rendering
+-  **Accessible** - WCAG AA compliant with keyboard navigation
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Quick Start](#-quick-start)
 - [Project Structure](#-project-structure)
@@ -27,7 +27,7 @@
 - [Deployment](#-deployment)
 - [Documentation](#-documentation)
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Node.js 18+ 
@@ -58,7 +58,7 @@ npm run build
 npm run preview
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 ntp-electric-website/
@@ -91,7 +91,7 @@ ntp-electric-website/
 └── README.md                            # This file
 ```
 
-## 📄 Pages
+##  Pages
 
 ### Homepage (`/`)
 One-page scrolling layout with sections:
@@ -118,7 +118,7 @@ Comprehensive contact experience:
 - Office information and hours
 - Google Maps integration
 
-## 🧩 Components
+##  Components
 
 ### Navbar
 - Fixed at top with scroll shadow effect
@@ -141,7 +141,7 @@ Comprehensive contact experience:
 - Contact information
 - Copyright and legal links
 
-## 🎨 Customization
+##  Customization
 
 ### Update Brand Colors
 
@@ -191,48 +191,20 @@ transition={{ duration: 1.0 }}
 initial={{ opacity: 0, x: -50 }}
 ```
 
-## 🚀 Deployment
+##  Deployment
 
 ### Recommended Platforms
 
-1. **Vercel** (Recommended)
+ **Vercel** 
    ```bash
    npm install -g vercel
    vercel
    ```
 
-2. **Netlify**
-   - Connect Git repository
-   - Build command: `npm run build`
-   - Publish directory: `dist`
 
-3. **Traditional Hosting**
-   ```bash
-   npm run build
-   # Upload dist/ folder to web server
-   ```
 
-### Environment Setup
 
-No environment variables required for basic deployment. 
-
-For contact form backend integration:
-```bash
-VITE_EMAIL_API_KEY=your_api_key
-VITE_EMAIL_ENDPOINT=your_endpoint
-```
-
-## 📚 Documentation
-
-| Document | Description |
-|----------|-------------|
-| [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | Detailed technical architecture |
-| [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | Complete usage and customization guide |
-| [QUICK_START.md](QUICK_START.md) | Quick reference for common tasks |
-| [TESTING_CHECKLIST.md](TESTING_CHECKLIST.md) | Pre-launch testing checklist |
-| [REFACTOR_SUMMARY.md](REFACTOR_SUMMARY.md) | What changed from previous version |
-
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Core
 - **React 18.3.1** - UI library
@@ -254,7 +226,7 @@ VITE_EMAIL_ENDPOINT=your_endpoint
 - **PostCSS** - CSS processing
 - **@vitejs/plugin-react** - React integration
 
-## 🌍 Browser Support
+##  Browser Support
 
 | Browser | Version | Status |
 |---------|---------|--------|
@@ -265,7 +237,7 @@ VITE_EMAIL_ENDPOINT=your_endpoint
 | iOS Safari | 14+ | ✅ Fully Supported |
 | Chrome Mobile | Latest | ✅ Fully Supported |
 
-## 📱 Responsive Breakpoints
+##  Responsive Breakpoints
 
 | Breakpoint | Width | Layout |
 |------------|-------|--------|
@@ -274,55 +246,41 @@ VITE_EMAIL_ENDPOINT=your_endpoint
 | Desktop | 1024px+ | 3-column grids, right contact bar |
 | XL | 1280px+ | Max content width, enhanced spacing |
 
-## 🎯 Performance
+##  Performance
 
-- ⚡ Initial load < 3 seconds
-- 📊 Lighthouse score > 90
-- 🖼️ Optimized image loading
-- ♻️ Efficient re-renders
-- 🎬 60fps animations
+-  Initial load < 3 seconds
+-  Lighthouse score > 90
+-  Optimized image loading
+-  Efficient re-renders
+-  60fps animations
 
-## ♿ Accessibility
+##  Accessibility
 
-- ✅ WCAG AA compliant
-- ⌨️ Full keyboard navigation
-- 🎯 Proper focus indicators
-- 🎨 High contrast colors
-- 📝 Semantic HTML structure
-- 🏷️ ARIA labels where needed
+-  WCAG AA compliant
+-  Full keyboard navigation
+-  Proper focus indicators
+-  High contrast colors
+   Semantic HTML structure
+-  ARIA labels where needed
 
-## 📞 Support
 
-For issues or questions:
-1. Check the documentation files
-2. Review component inline comments
-3. Test with the testing checklist
-4. Contact development team
 
-## 📝 License
+##  License
 
 Copyright © 2026 NTP Electric and Engineering Co., Ltd.  
 All rights reserved.
 
-## 🙏 Acknowledgments
-
-- **Design**: Modern engineering company aesthetic
-- **Images**: Unsplash for professional imagery
-- **Fonts**: Google Fonts (Sarabun, Inter)
-- **Icons**: Lucide React icon library
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 1. **Install**: `npm install`
 2. **Develop**: `npm run dev`
 3. **Build**: `npm run build`
 4. **Deploy**: Upload `dist/` folder or use Vercel/Netlify
 
-**Ready to go!** The website is production-ready and fully functional. Start customizing by updating contact information and project data.
 
-For detailed guides, see the documentation files listed above.
 
 ---
 
